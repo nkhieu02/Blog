@@ -1,9 +1,25 @@
-GET http://localhost:3001/api/blog/
+GET http://localhost:3001/api/blogs/
 ### 
 POST http://localhost:3001/api/blogs/
 Content-Type: application/json
 
 {
+"title": "hieu",
 "author": "Mario Puzo", 
-"url": "https://books.google.com.vn/books/about/The_Godfather.html?id=acy0U6WyM7MC&redir_esc=y", 
-"like": 100 }
+"url": "Hieu", 
+"likes": 100,
+"userId": "62e18ca497eb7fb133bd576a"  }
+
+###
+POST http://localhost:3001/api/users/
+Content-Type: application/json
+
+{
+    "username": "nkhieu2002",
+    "name": "HieuNguyen",
+    "password": "1234qwer"
+}
+
+###
+GET http://localhost:3001/api/users/
+
