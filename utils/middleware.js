@@ -1,5 +1,6 @@
 const { model } = require('mongoose');
 const logger = require('./logger');
+const jwt = require('jsonwebtoken')
 
 const requestLogger = (request, response, next) => {
     logger.info('Method:', request.method);
@@ -32,9 +33,22 @@ const tokenRegister = (request, response, next) => {
     next();
 }
 
+const userExtractor = (request, response, next) => {
+    const token = request.token
+    if(token === null) {
+        return response.status(401).json({error: "Unauthorized"})
+    }
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if(!decodedToken.id) {
+        return response.status(401).json({error: 'Unauthorized'})
+    }
+    request.userId = decodedToken.id
+    next()
+}
 module.exports = {
     requestLogger,
     unknownEndpoint,
     errorHandler,
-    tokenRegister
+    tokenRegister,
+    userExtractor
 }
