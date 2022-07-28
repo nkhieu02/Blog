@@ -7,6 +7,7 @@ require('express-async-errors')
 
 const router = require('./controllers/router')
 const users = require('./controllers/users')
+const login = require('./controllers/login')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 
@@ -25,6 +26,8 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
+app.use(middleware.tokenRegister);
+app.use('/api/login', login);
 app.use('/api/blogs', router);
 app.use('/api/users', users);
 app.use(middleware.unknownEndpoint);
