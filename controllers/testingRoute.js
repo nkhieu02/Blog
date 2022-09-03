@@ -1,5 +1,5 @@
 const testingRouter = require('express').Router()
-const Blog = require('../models/note')
+const Blog = require('../models/db')
 const User = require('../models/user')
 
 testingRouter.post('/reset', async (request, response) => {
